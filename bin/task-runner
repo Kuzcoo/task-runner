@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+'use strict';
+
+const {exec} = require('child_process');
+const taskName = process.argv[2];
+const CWD = process.cwd();
+
+exec(`node ${CWD}/runnerfile.js ${taskName}`, (err, stdout, stderr) => {
+  if (err) return console.log(stderr);
+  console.log(stdout);
+});
+
+

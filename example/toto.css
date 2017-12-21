@@ -1,0 +1,11 @@
+.plop {
+  display: none;
+  font-weight: bold;
+  color: #333;
+}
+
+.kikoo {
+  display: block;
+  text-align: center;
+  width: 50%;
+}

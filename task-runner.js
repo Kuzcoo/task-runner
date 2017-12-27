@@ -1,14 +1,15 @@
 'use strict';
 
 const fs = require('fs');
-const taskName = process.argv[2] || 'default';
+const taskName = getTaskName(process.argv[2]); 
 
 var tasks = {};
 
 module.exports = {
   task,
   src,
-  dest
+  dest,
+  watch
 };
 
 function task(name, tasksBefore = null, taskCallback = null) {
@@ -31,6 +32,14 @@ function dest(outputPath) {
   return function (content) {
     fs.writeFileSync(outputPath, content);
   }
+}
+
+function watch(filePath, taskName) {
+  fs.watch(filePath, {encoding: 'buffer'}, function (eventType, fileName) {
+    if (fileName) {
+      runTask(taskName);
+    }
+  });
 }
 
 function bindPipe(content) {
@@ -83,6 +92,14 @@ function processTaskArgs(tasksBefore, taskCallback) {
     beforeTasks,
     callback
   }
+}
+
+function getTaskName(arg) {
+  if (arg === 'undefined') {
+    return 'default';
+  }
+
+  return arg;
 }
 
 function isArray(element) {

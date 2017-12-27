@@ -1,7 +1,7 @@
 {
   "name": "task-runner",
   "version": "0.1.0",
-  "description": "",
+  "description": "A basic task runner as a poc",
   "main": "task-runner.js",
   "bin": "./bin/task-runner",
   "scripts": {
